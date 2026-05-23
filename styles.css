@@ -6,7 +6,7 @@
     --text: #c2185b;
     --card-back: linear-gradient(135deg, #ff6b9d 0%, #c2185b 100%);
     --float-duration: 18s;
-    --bounce-speed: 0.8s;
+    --bounce-speed: 3.2s;
 }
 
 * { box-sizing: border-box; }
@@ -26,6 +26,16 @@ body {
 }
 
 .script-font { font-family: 'Dancing Script', cursive; }
+
+/* Screen 2 (love bar) anchors top + smoothly grows so adding messages
+   doesn't yank the layout via re-centering. Only applies to screen 2. */
+body.screen-2-active {
+    align-items: flex-start;
+    padding-top: 8vh;
+}
+body.screen-2-active .container {
+    transition: min-height 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 .container {
     position: relative;
@@ -210,7 +220,7 @@ h2 { font-weight: 600; color: var(--text); margin-bottom: 1.5rem; }
     padding: 6px 14px;
     border-radius: 12px;
     background: rgba(255, 107, 157, 0.15);
-    animation: msgPop 0.45s ease both, bounce var(--bounce-speed) infinite alternate 0.45s;
+    animation: msgPop 2.3s ease both, bounce var(--bounce-speed) infinite alternate 2.3s;
 }
 @keyframes msgPop {
     0%   { opacity: 0; transform: scale(0.6) translateY(-4px); }

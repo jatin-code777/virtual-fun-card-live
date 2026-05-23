@@ -40,6 +40,7 @@
         document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
         const el = document.getElementById(id);
         el.classList.remove('hidden');
+        document.body.classList.toggle('screen-2-active', id === 'screen-2');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -210,9 +211,9 @@
     // Visual cap on bar width so layout stays sane; numeric value keeps climbing.
     const MAX_VISUAL_PCT = 1800;
     const FILL_DURATION  = 2200;   // ms to reach 100%
-    const PAUSE_AT_100   = 3000;   // ms breather at 100% before going beyond
-    const EXP_DURATION   = 5500;   // ms of exponential growth after the pause
-    const FINAL_VALUE    = 999999; // numeric value at end of exp phase
+    const PAUSE_AT_100   = 5000;   // ms breather at 100% before going beyond
+    const EXP_DURATION   = 6500;   // ms of exponential growth after the pause
+    const FINAL_VALUE    = 9999999; // numeric value at end of exp phase
 
     function formatValue(v) {
         if (v >= 100000) return Math.round(v / 1000) + ',000';
@@ -221,12 +222,31 @@
     }
 
     // Milestone tracking handled inline by phase transitions in runLoveBar.
+    // Animates the container's min-height so newly-pushed messages don't
+    // cause a layout jerk — the box grows smoothly downward.
+    const container = document.querySelector('.container');
     function pushMessage(text) {
+        const prev = container.getBoundingClientRect().height;
+        // Lock the box at its current height BEFORE inserting, so the insert
+        // doesn't visibly snap to the new height for even one frame.
+        container.style.minHeight = prev + 'px';
+
         extraLove.classList.remove('hidden');
         const div = document.createElement('div');
         div.className = 'love-msg';
         div.textContent = text;
         extraLove.appendChild(div);
+
+        // Measure target height with the new pill in place but box still locked.
+        const prevMin = container.style.minHeight;
+        container.style.minHeight = 'auto';
+        const next = container.getBoundingClientRect().height;
+        container.style.minHeight = prevMin;
+
+        // Transition to the new height on the next frame.
+        requestAnimationFrame(() => {
+            container.style.minHeight = next + 'px';
+        });
     }
 
     function runLoveBar() {
