@@ -16,8 +16,8 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 30vh 0 5vh;
+    align-items: center;
+    padding: 4vh 0;
     background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
     background-attachment: fixed;
     font-family: 'Poppins', Arial, sans-serif;
@@ -26,11 +26,6 @@ body {
 }
 
 .script-font { font-family: 'Dancing Script', cursive; }
-
-body.centered {
-    align-items: center;
-    padding: 5vh 0;
-}
 
 .container {
     position: relative;
@@ -224,8 +219,8 @@ h2 { font-weight: 600; color: var(--text); margin-bottom: 1.5rem; }
 @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.18); } }
 
 /* ---------- Card flip ---------- */
-.card-intro { font-size: 1.2rem; margin-bottom: 1rem; }
-.flip-hint { font-size: 0.9rem; opacity: 0.7; margin-top: 1rem; }
+.card-intro { font-size: 1.1rem; margin: 0 0 0.6rem; }
+.flip-hint { font-size: 0.85rem; opacity: 0.7; margin: 0.6rem 0 0; }
 .card-stage {
     perspective: 1400px;
     display: flex;
@@ -235,7 +230,10 @@ h2 { font-weight: 600; color: var(--text); margin-bottom: 1.5rem; }
 }
 .card-flipper {
     position: relative;
-    width: min(420px, 80vw);
+    /* Width must fit: design max (420px), 80vw, OR available viewport height.
+       Reserve ~200px for intro, hint, container & body padding; the card
+       itself is 3:4 (height = width × 4/3), so allowed width = avail × 3/4. */
+    width: min(420px, 80vw, calc((100vh - 220px) * 0.75));
     aspect-ratio: 3 / 4;
     transition: transform 1.1s cubic-bezier(0.4, 0.2, 0.2, 1);
     transform-style: preserve-3d;

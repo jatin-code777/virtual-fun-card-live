@@ -40,7 +40,6 @@
         document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
         const el = document.getElementById(id);
         el.classList.remove('hidden');
-        document.body.classList.toggle('centered', id === 'screen-3');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
