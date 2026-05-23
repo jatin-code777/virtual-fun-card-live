@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="floating-elements" aria-hidden="true"></div>
+
+    <main class="container">
+
+        <!-- Screen 0: Locked gate -->
+        <section class="screen" id="screen-gate">
+            <h1 class="script-font">For you 💝</h1>
+            <p class="hint" id="gateHint"></p>
+            <form id="gateForm" autocomplete="off">
+                <input type="text" id="gateInput" autocomplete="off" autocapitalize="off" spellcheck="false">
+                <button type="submit" class="cute-btn" id="gateBtn"></button>
+            </form>
+            <p class="error hidden" id="gateError"></p>
+        </section>
+
+        <!-- Screen 1: Do you like me? -->
+        <section class="screen hidden" id="screen-1">
+            <h2 id="q1Text"></h2>
+            <div class="btn-row">
+                <button class="cute-btn final-yes" id="q1Yes"></button>
+                <button class="cute-btn" id="q1No"></button>
+            </div>
+            <p class="nudge hidden" id="q1Nudge"></p>
+            <div class="secret-answer">
+                <button class="cute-btn special" id="q1Secret"></button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Auto love bar -->
+        <section class="screen hidden" id="screen-2">
+            <h2 id="q2Text"></h2>
+            <p class="this-much" id="startText"></p>
+            <div class="love-bar-wrap">
+                <div class="love-bar-track">
+                    <div class="love-bar-fill" id="loveBarFill"></div>
+                </div>
+            </div>
+            <p class="love-readout">
+                <span id="loveValue">0</span>%
+            </p>
+            <div id="extraLove" class="hidden"></div>
+            <button class="cute-btn hidden" id="q2Next"></button>
+        </section>
+
+        <!-- Screen 3: The card -->
+        <section class="screen hidden" id="screen-3">
+            <p class="card-intro" id="cardIntro"></p>
+            <div class="card-stage">
+                <div class="card-flipper" id="cardFlipper" tabindex="0" role="button" aria-label="Open card">
+                    <div class="card-face card-front">
+                        <img id="cardImg" alt="Your card">
+                    </div>
+                    <div class="card-face card-back">
+                        <h2 class="script-font" id="cardTitle"></h2>
+                        <div class="poem" id="cardPoem"></div>
+                        <p class="signature" id="cardSig"></p>
+                        <p class="signoff script-font" id="cardSignOff"></p>
+                    </div>
+                </div>
+            </div>
+            <p class="flip-hint" id="flipHint"></p>
+        </section>
+    </main>
+
+    <script src="config.public.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
